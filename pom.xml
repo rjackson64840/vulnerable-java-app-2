@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.sonatype.test</groupId>
+  <artifactId>vulnerable-java-app</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+ <scm>
+    <url>https://github.com/rjackson64840/vulnerable-java-app</url>
+    <connection>scm:git:git://github.com/rjackson64840/vulnerable-java-app.git</connection>
+    <developerConnection>scm:git:git@github.com:rjackson64840/vulnerable-java-app.git</developerConnection>
+ </scm>
+
+ <dependencies>
+
+    <!-- test scenarios/data captured from:  https://docs.sonatype.com/display/DATA/False+Positive+Reduction -->
+
+    <!-- A: Coordinate not in HDS: True positive -->
+    <!--<dependency>-->
+      <!--<groupId>com.adobe</groupId>-->
+      <!--<artifactId>xmpcore</artifactId>-->
+      <!--<version></version>-->
+    <!--</dependency>-->
+
+
+    <dependency>
+     <groupId>com.auth0</groupId>
+     <artifactId>java-jwt</artifactId>
+     <version>3.3.0</version>
+   </dependency>
+
+
+   <!--
+
+     <dependency>
+      <groupId>com.auth0</groupId>
+      <artifactId>java-jwt</artifactId>
+      <version>3.3.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.struts</groupId>
+      <artifactId>struts2-core</artifactId>
+      <version>2.3.7</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-core</artifactId>
+      <version>2.7.8</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.7.8</version>
+    </dependency>
+    -->
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.owasp</groupId>
+        <artifactId>dependency-check-maven</artifactId>
+        <version>3.2.1</version>
+        <configuration>
+          <cveUrl12Modified>https://nvd.nist.gov/feeds/xml/cve/1.2/nvdcve-Modified.xml.gz</cveUrl12Modified>
+          <cveUrl20Modified>https://nvd.nist.gov/feeds/xml/cve/2.0/nvdcve-2.0-Modified.xml.gz</cveUrl20Modified>
+          <cveUrl12Base>https://nvd.nist.gov/feeds/xml/cve/1.2/nvdcve-%d.xml.gz</cveUrl12Base>
+          <cveUrl20Base>https://nvd.nist.gov/feeds/xml/cve/2.0/nvdcve-2.0-%d.xml.gz</cveUrl20Base>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>
